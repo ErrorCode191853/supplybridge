@@ -6,10 +6,10 @@ public class Main {
         Material aluminiumSheet2mm = new Material("MAT-0001", "Aluminium Sheet 2mm", null, "Raw Material", UnitOfMeasure.PIECE);
         System.out.println(aluminiumSheet2mm);
 
-//        Material steelPowder = new Material("MAT-0002", "Steel Powder", null, "Raw Material", UnitOfMeasure.KILOGRAM);
+        // Blank material number on purpose: shows the constructor rejecting invalid input.
         try {
             Material steelPowder = new Material(
-                    "MAT-0002", "Steel Powder",
+                    "  ", "Steel Powder",
                     null, "Raw Material",
                     UnitOfMeasure.KILOGRAM);
 
