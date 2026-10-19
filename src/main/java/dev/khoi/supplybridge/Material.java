@@ -10,7 +10,8 @@ public class Material {
     private String description;
     private String category;
 
-    private UnitOfMeasure unitOfMeasure;
+    // Final on purpose: changing the base unit would silently reinterpret existing quantities.
+    private final UnitOfMeasure unitOfMeasure;
 
     public Material(String materialNumber, String name, String description, String category, UnitOfMeasure unitOfMeasure) {
         this.name = requireNonBlank(name, "name");
@@ -38,6 +39,36 @@ public class Material {
 
     public UnitOfMeasure getUnitOfMeasure() {
         return unitOfMeasure;
+    }
+
+    public void rename(String newName) {
+        this.name = requireNonBlank(newName, "name");
+    }
+
+    public void changeDescription(String newDescription) {
+        this.description = normalizeOptional(newDescription);
+    }
+
+    public void changeCategory(String newCategory) {
+        this.category = normalizeOptional(newCategory);
+    }
+
+    // Material is an entity: two instances are the same material when their material numbers match,
+    // regardless of the current name, description or category.
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Material other)) {
+            return false;
+        }
+        return materialNumber.equals(other.materialNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return materialNumber.hashCode();
     }
 
     @Override
