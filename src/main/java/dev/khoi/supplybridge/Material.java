@@ -53,8 +53,6 @@ public class Material {
         this.category = normalizeOptional(newCategory);
     }
 
-    // Material is an entity: two instances are the same material when their material numbers match,
-    // regardless of the current name, description or category.
     @Override
     public boolean equals(Object o) {
         if (this == o) {
